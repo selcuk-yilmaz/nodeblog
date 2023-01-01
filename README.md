@@ -6,7 +6,7 @@ Node.js nedir: Bizi js'in tarayıcı ile sınırlı çalışma ortamından kurta
 v8 engine nedir? Google taraqfından geliştirilmiş c++ ile  yazsılmış js kodlarını makine diline çeviren engiine'dir.Node.js de c++ ile yazılmıştır.
 Node.js de module ile paket kavramı aynı anlamda kullanılabilir.
 
-mkdir nodeblog
 
-node app
+mkdir nodeblog
+node app.js or node app
 
