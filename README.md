@@ -2,10 +2,10 @@
 
 node --version
 
-Node.js Extension Pack     Wade Anderson 'ın isteğe bağlı
-Node.js nedir: Bizi js'in tarayıcı ile sınırlı çalışma ortamından kurtaran, js kodlarını çalıştırabildiğimiz bir enviroment'tır.Bazen server da çalışan js de denir.
-v8 engine nedir? Google taraqfından geliştirilmiş c++ ile  yazsılmış js kodlarını makine diline çeviren engiine'dir.Node.js de c++ ile yazılmıştır.
-Node.js de module ile paket kavramı aynı anlamda kullanılabilir.
+*Node.js Extension Pack     Wade Anderson 'ın isteğe bağlı
+*Node.js nedir: Bizi js'in tarayıcı ile sınırlı çalışma ortamından kurtaran, js kodlarını çalıştırabildiğimiz bir enviroment'tır.Bazen server da çalışan js de denir.
+*v8 engine nedir? Google taraqfından geliştirilmiş c++ ile  yazsılmış js kodlarını makine diline çeviren engiine'dir.Node.js de c++ ile yazılmıştır.
+*Node.js de module ile paket kavramı aynı anlamda kullanılabilir.
 *callback function asenkron çalışmayı sağlayan yöntemdir, her iş tek tek gelir ancak bir işin başlaması için diğer işin bitmesi beklenmez. 
 *TCP=Transtion control panel
 *IP=ınternet protokolü
