@@ -16,14 +16,18 @@ node --version
 
 mkdir nodeblog
 node app.js or node app
-npm init
+npm init   /package.json dosyası oluşur
 npm -v
-npm install   /node modules dosyasını silince tekrar oluşturmak için
 npm install express /belli yönlendirmeleri yapar.node.js'de oluşturulan web uygulamalarını daha kolay sağlar.expressjs.com
 npm install nodemon --save-dev  /yapılan değişikleri otomatik update etmesi  için her seferinde node app.js yapmaya gerek kalmaz.
-npm install -g nodemon  /nodemon u global indirir.modules dosyasında dependencies te gözükmez
+npm install -g nodemon  /nodemon u global indirir.her projede indirmye gerek kalmaz.modules dosyasında dependencies te gözükmez
 nodemon app  /js ortamndaki yaptığımız değişikleri izler otomatik olarak görünür yapar
+
+npm install   /node modules dosyasını silince tekrar oluşturmak için kullanırız
 
 *template engine ler HTML sayfalarını  daha kolay yazdırmamızı sağlar.ör:handlebars,....
 npm install express-handlebars
-
+*expresle genel olarak 2 iş yaparız.1-belli yönlendirmeleri yaparız.2-belli işlevsellikleri yani databaseden veri alma verme aslında bu işlevler middleware olarak denebilir
+*express kütüphanesinde middleware  routingle beraber expresin omurgasıdır
+*express.static= express de gömülü built-in middleware function dur.
+*template engineler ör: jade edge handlebars.... 
