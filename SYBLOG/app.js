@@ -24,6 +24,18 @@ app.get("/blog", (req, res) => {
   // res.sendFile(path.resolve(__dirname,"site/about.html"))
   res.render("site/blog");
 });
+app.get("/contact", (req, res) => {
+  // res.sendFile(path.resolve(__dirname,"site/about.html"))
+  res.render("site/contact");
+});
+app.get("/login", (req, res) => {
+  // res.sendFile(path.resolve(__dirname,"site/about.html"))
+  res.render("site/login");
+});
+app.get("/register", (req, res) => {
+  // res.sendFile(path.resolve(__dirname,"site/about.html"))
+  res.render("site/register");
+});
 
 
 app.listen(port, hostname, () => {
