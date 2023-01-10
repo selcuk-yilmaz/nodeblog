@@ -31,3 +31,8 @@ npm install express-handlebars
 *express kütüphanesinde middleware  routingle beraber expresin omurgasıdır
 *express.static= express de gömülü built-in middleware function dur.
 *template engineler ör: jade edge handlebars.... 
+
+*compass terminalde yapabileceğimiz işleri daha kolay yapabilmemizi sağlayan bir GUİ dir.
+*mongoose nesne modelleme librarry dir.veritabanı ile irtiibatı sağlar ve verileri database yazar
+
+npm install mongoose
