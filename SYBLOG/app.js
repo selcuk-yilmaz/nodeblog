@@ -1,11 +1,12 @@
 // const path = require("path");  //!buna gerek kalmadı.
-const express = require("express");
+const express = require("express")
 const exphbs =require("express-handlebars")
-const app = express();
-const port = 3000;
-const hostname = "127.0.0.1";
-
+const app = express()
+const port = 3000
+const hostname = "127.0.0.1"
 const mongoose = require("mongoose")
+const bodyParser = require("body-parser")
+
 mongoose
   .connect("mongodb://127.0.0.1/nodeblog_db")
   .then(() => console.log("Connected!"));
@@ -16,12 +17,28 @@ app.engine("handlebars", exphbs.engine());
 app.set("view engine", "handlebars");
 // app.set("views", "./views");
 
+//! bodyparserı bu sayfada en sona yazdın çalışmadı???
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
+
+
 app.listen(port, hostname, () => {
   console.log(`Server calisti mi, http://${hostname}:${port}/`);
 });
 
 const main = require('./routes/main')
 app.use('/',main)
+
+const posts = require('./routes/posts')
+app.use('/posts',posts)
+
+
+
+
+
 
 //!bu bölümü routes a taşıdık below yerine 23. ve 24. satıra yazılana bak
 // app.get("/",(req,res)=>{
