@@ -14,6 +14,10 @@ router.get("/about", (req, res) => {
 });
 router.get("/blog", (req, res) => {
   // res.sendFile(path.resolve(__dirname,"site/about.html"))
+
+
+
+  
   res.render("site/blog");
 });
 router.get("/contact", (req, res) => {
