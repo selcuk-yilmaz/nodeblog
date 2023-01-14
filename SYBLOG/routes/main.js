@@ -1,6 +1,6 @@
 const express = require("express");
-
-const router=express.Router()
+const router = express.Router();
+const Post = require("../models/Post");
 
 //! app yazan yerleri router ile değiştirdik.
 router.get("/", (req, res) => {
@@ -12,14 +12,15 @@ router.get("/about", (req, res) => {
   // res.sendFile(path.resolve(__dirname,"site/about.html"))
   res.render("site/about");
 });
+//! HTML'e databaseden veri gönderiyoruz. HTML'de karşılanacak
 router.get("/blog", (req, res) => {
   // res.sendFile(path.resolve(__dirname,"site/about.html"))
-
-
-
-  
-  res.render("site/blog");
+  //  res.render("site/blog");
+  Post.find({}).lean().then((posts) => {
+    res.render("site/blog", { posts: posts });
+  });
 });
+
 router.get("/contact", (req, res) => {
   // res.sendFile(path.resolve(__dirname,"site/about.html"))
   res.render("site/contact");
@@ -33,7 +34,4 @@ router.get("/register", (req, res) => {
   res.render("site/register");
 });
 
-
-
-
-module.exports=router
+module.exports = router;
