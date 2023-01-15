@@ -16,7 +16,8 @@ router.get('/:id', (req, res) => {
 
 
 
-
+//!1-aşağıdaki body i app.js den kendi çekiyor,db deki veriyi okumak için
+//!2-/test add.handlebars daki formun action bölümüne yazdığımz uzantı olmak zorunda
 router.post("/test", (req, res) => {
   // res.sendFile(path.resolve(__dirname,"site/about.html"))
   // res.send("TEST OK");
