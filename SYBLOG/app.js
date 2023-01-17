@@ -6,10 +6,15 @@ const port = 3000
 const hostname = "127.0.0.1"
 const mongoose = require("mongoose")
 const bodyParser = require("body-parser")
+const fileUpload = require("express-fileUpload")
 //!mongoose kullanımı.veritabanı ile irtiibatı sağlar ve verileri database yazar
 mongoose
   .connect("mongodb://127.0.0.1/nodeblog_db")
   .then(() => console.log("Connected!"));
+
+  app.use(fileUpload())
+
+
 //! static dosyaların okunması için
 app.use(express.static('public'))
 //!template engine ler HTML sayfalarını daha kolay yazdırmamızı sağlar.ör:handlebars
@@ -20,9 +25,15 @@ app.set("view engine", "handlebars");
 //! bodyparser db i okuma işlemi ı bu sayfada en sona yazdın çalışmadı???
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
-
 // parse application/json
 app.use(bodyParser.json())
+
+//!kendi middleware lerimizi create edebiliriz.Why?bir işlem yapmadan önce dataya ihtiyaç duyarız yada başka şeylere bu datayı veya işlemleri elde edebilmek için middle ware kullanırız.örnek deneme bir middleware
+// const myMiddleware =(req,res,next) =>{
+//   console.log(`'benim adım tatarramazan'`)
+//   next() 
+// }
+// app.use('/',myMiddleware)
 
 
 app.listen(port, hostname, () => {
