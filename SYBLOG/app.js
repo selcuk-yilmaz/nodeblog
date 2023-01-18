@@ -7,6 +7,7 @@ const hostname = "127.0.0.1"
 const mongoose = require("mongoose")
 const bodyParser = require("body-parser")
 const fileUpload = require("express-fileUpload")
+const generateDate =require('./helpers/generateDate').generateDate
 //!mongoose kullanımı.veritabanı ile irtiibatı sağlar ve verileri database yazar
 mongoose
   .connect("mongodb://127.0.0.1/nodeblog_db")
@@ -17,8 +18,21 @@ mongoose
 
 //! static dosyaların okunması için
 app.use(express.static('public'))
+
+//!aşağıyı burda da yapabiririz ama helpers folder ına taşıyoruz sonra yukarda bağlantısını veriyoruz modülerbir yapı için
+// const hbs =exphbs.create({
+//   helpers:{
+//     generateDate:(date,format) =>{
+//       return moment(date).format(format)
+//     }
+//   }
+// })
+
 //!template engine ler HTML sayfalarını daha kolay yazdırmamızı sağlar.ör:handlebars
-app.engine("handlebars", exphbs.engine());
+app.engine(
+  "handlebars",
+  exphbs.engine({ helpers: { generateDate: generateDate } })
+);
 app.set("view engine", "handlebars");
 // app.set("views", "./views");
 
