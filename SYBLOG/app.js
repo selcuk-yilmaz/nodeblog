@@ -10,16 +10,22 @@ const fileUpload = require("express-fileUpload")
 const generateDate =require('./helpers/generateDate').generateDate
 //!mongoose kullanımı.veritabanı ile irtiibatı sağlar ve verileri database yazar
 mongoose
+  .set("strictQuery", true)
   .connect("mongodb://127.0.0.1/nodeblog_db")
   .then(() => console.log("Connected!"));
 
-  app.use(fileUpload())
+  // ,{
+  //   useNewUrlParser: true,
+  //   useUnifiedTopology: true,
+  //   useCreateIndex: true,
+  // };
 
+  app.use(fileUpload())
 
 //! static dosyaların okunması için
 app.use(express.static('public'))
 
-//!aşağıyı burda da yapabiririz ama helpers folder ına taşıyoruz sonra yukarda bağlantısını veriyoruz modülerbir yapı için
+//!aşağıyı burda da yapabiririz ama helpers folderına taşıyoruz sonra yukarda bağlantısını veriyoruz modülerbir yapı için
 // const hbs =exphbs.create({
 //   helpers:{
 //     generateDate:(date,format) =>{
@@ -51,7 +57,7 @@ app.use(bodyParser.json())
 
 
 app.listen(port, hostname, () => {
-  console.log(`Server calisti mi, http://${hostname}:${port}/`);
+  console.log(`Server is working, http://${hostname}:${port}/`);
 });
 
 const main = require('./routes/main')
@@ -60,8 +66,8 @@ app.use('/',main)
 const posts = require('./routes/posts')
 app.use('/posts',posts)
 
-
-
+const users = require('./routes/users')
+app.use('/users',users)
 
 
 

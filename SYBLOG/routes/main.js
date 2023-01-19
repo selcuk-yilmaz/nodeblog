@@ -25,13 +25,17 @@ router.get("/contact", (req, res) => {
   // res.sendFile(path.resolve(__dirname,"site/about.html"))
   res.render("site/contact");
 });
-router.get("/login", (req, res) => {
-  // res.sendFile(path.resolve(__dirname,"site/about.html"))
-  res.render("site/login");
-});
-router.get("/register", (req, res) => {
-  // res.sendFile(path.resolve(__dirname,"site/about.html"))
-  res.render("site/register");
-});
+
+//!aşağıyı users ın içine taşıduık
+// router.get("/login", (req, res) => {
+//   // res.sendFile(path.resolve(__dirname,"site/about.html"))
+//   res.render("site/login");
+// });
+
+//!aşağıyı users ın içine taşıduık
+// router.get("/register", (req, res) => {
+//   // res.sendFile(path.resolve(__dirname,"site/about.html"))
+//   res.render("site/register");
+// });
 
 module.exports = router;
