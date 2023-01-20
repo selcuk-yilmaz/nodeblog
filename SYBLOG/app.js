@@ -42,7 +42,7 @@ app.engine(
 app.set("view engine", "handlebars");
 // app.set("views", "./views");
 
-//! bodyparser db i okuma işlemi ı bu sayfada en sona yazdın çalışmadı???
+//! bodyparser db i okuma işlemidiir.Bu sayfada en sona yazdın çalışmadı??? app.js de sıra önemli
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
@@ -69,9 +69,7 @@ app.use('/posts',posts)
 const users = require('./routes/users')
 app.use('/users',users)
 
-
-
-//!bu bölümü routes a taşıdık below yerine 23. ve 24. satıra yazılana bak
+//!bu bölümü routes a taşıdık.buraya main post users ı taşıdık
 // app.get("/",(req,res)=>{
 //   // res.sendFile(path.resolve(__dirname,"site/index.html"))
 //   res.render("site/index");
