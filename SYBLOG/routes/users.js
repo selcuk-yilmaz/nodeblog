@@ -8,6 +8,8 @@ router.get('/register',(req,res)=>{
 router.post('/register',(req,res)=>{
     User.create(req.body,(error,user)=>{
         res.redirect('/')
+        // console.log(req.body);
+        
     })
    
 })
@@ -21,8 +23,9 @@ router.post("/login", (req, res) => {
 const {email,password} =req.body
 User.findOne({email},(error,user)=>{
     if(user){
-        if(user.password ==password){
+        if(user.password == password){
             //USER SESSİON
+              console.log(user._id);
             req.session.userId = user._id
             res.redirect('/')
         }else{

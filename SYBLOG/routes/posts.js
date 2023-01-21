@@ -5,22 +5,22 @@ const path = require("path");
 
 router.get("/new", (req, res) => {
   // res.sendFile(path.resolve(__dirname,"site/about.html"))
-  if(req.session.userId){
+  // if(req.session){
     return res.render('site/addpost')
-  }
-  res.redirect("/users/login");
+  // }
+  // res.redirect("/users/login");
 });
 
 router.get("/:id", (req, res) => {
   // res.sendFile(path.resolve(__dirname,"site/about.html"))
   // console.log(req.params);
   Post.findById(req.params.id).then((post) => {
-    res.render("site/post", { post: post.toJSON() });
+    res.render("/site/post", { post: post.toJSON() });
   });
 });
 
 //!1-aşağıdaki body i app.js den kendi çekiyor,db deki veriyi okumak için
-//!2-add.handlebars daki formun action bölümüne yazdığımz uzantı ile aşağıdaki uzanrı aynı olmak zorunda==>> /test
+//!2-add.handlebarsdaki formun action bölümüne yazdığımz uzantı ile aşağıdaki uzantı aynı olmak zorunda==>> /test
 router.post("/test", (req, res) => {
   // res.sendFile(path.resolve(__dirname,"site/about.html"))
   // res.send("TEST OK");
@@ -33,9 +33,13 @@ router.post("/test", (req, res) => {
   Post.create({
     ...req.body,
     post_image: `/img/postimages/${post_image.name}`,
-  });
+  },)
+  req.session.sessionFlash = {
+    type: 'alert alert-success',
+    message: 'Your post was created successfully'
+  }
   // console.log(req.files.post_image.name);
-  res.redirect("/");
+  res.redirect('/blog');
 });
 
 module.exports = router;
