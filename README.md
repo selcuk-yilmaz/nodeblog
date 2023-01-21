@@ -36,3 +36,13 @@ npm install express-handlebars
 *mongoose nesne modelleme librarry dir.veritabanı ile irtiibatı sağlar ve verileri database yazar
 
 npm install mongoose
+
+
+
+
+//! EXPRESS.JS İLE İLGİLİ MVC DEN CONTROLLER İLE İLGİLİ GENEL BİR BİLGİ
+Express.js frameworkünü kullanırken, controller bölümünün işlevlerini yerine getirmek için route mekanizması kullanılabilir. Route, HTTP isteklerine yanıt verecek olan kod bloğunun nerede olduğunu ve nasıl çalıştırılacağını tanımlar.
+
+Express.js içinde, istekleri yönetmek için kullanılan yollar (route), genellikle controller bölümünde tanımlanır. Örneğin, bir web uygulamasına gelen bir HTTP GET isteğini işlemek için, route kullanılarak belirli bir fonksiyonun çağrılması sağlanır. Bu fonksiyon, genellikle controller bölümünde yer alır ve veri modeli ile iletişim kurarak, isteğe yanıt verir.
+
+Bu yüzden, Express.js frameworkünü kullanırken, route mekanizması kullanarak controller bölümünün işlevlerini yerine getirmek mümkündür. Ancak, uygulamanın büyüklüğüne ve ihtiyaçlarına göre, controller bölümünün işlevleri, yalnızca route mekanizması ile sınırlı kalmamaktadır.

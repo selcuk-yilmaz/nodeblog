@@ -5,8 +5,12 @@ const path = require("path");
 
 router.get("/new", (req, res) => {
   // res.sendFile(path.resolve(__dirname,"site/about.html"))
-  res.render("site/addpost");
+  if(req.session.userId){
+    return res.render('site/addpost')
+  }
+  res.redirect("/users/login");
 });
+
 router.get("/:id", (req, res) => {
   // res.sendFile(path.resolve(__dirname,"site/about.html"))
   // console.log(req.params);

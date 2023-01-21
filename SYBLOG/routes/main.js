@@ -5,6 +5,7 @@ const Post = require("../models/Post");
 //! app yazan yerleri router ile değiştirdik.
 router.get("/", (req, res) => {
   // res.sendFile(path.resolve(__dirname,"site/index.html"))
+  console.log(req.session);
   res.render("site/index");
 });
 

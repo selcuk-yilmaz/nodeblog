@@ -1,29 +1,40 @@
 // const path = require("path");  //!buna gerek kalmadı.
-const express = require("express")
-const exphbs =require("express-handlebars")
-const app = express()
-const port = 3000
-const hostname = "127.0.0.1"
-const mongoose = require("mongoose")
-const bodyParser = require("body-parser")
-const fileUpload = require("express-fileUpload")
-const generateDate =require('./helpers/generateDate').generateDate
+const express = require("express");
+const exphbs = require("express-handlebars");
+const app = express();
+const port = 3000;
+const hostname = "127.0.0.1";
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const fileUpload = require("express-fileUpload");
+const generateDate = require("./helpers/generateDate").generateDate;
+const expressSession = require("express-session");
+const connectMongo = require("connect-mongo");
 //!mongoose kullanımı.veritabanı ile irtiibatı sağlar ve verileri database yazar
 mongoose
   .set("strictQuery", true)
   .connect("mongodb://127.0.0.1/nodeblog_db")
   .then(() => console.log("Connected!"));
+// ,{
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   useCreateIndex: true,
+// };
 
-  // ,{
-  //   useNewUrlParser: true,
-  //   useUnifiedTopology: true,
-  //   useCreateIndex: true,
-  // };
+const mongoStore = connectMongo(expressSession);
+app.use(
+  expressSession({
+    secret: "testotesto",
+    resave: false,
+    saveUninitialized: true,
+    store: new mongoStore({ mongooseConnection: mongoose.connection }),
+  })
+);
 
-  app.use(fileUpload())
+app.use(fileUpload());
 
 //! static dosyaların okunması için
-app.use(express.static('public'))
+app.use(express.static("public"));
 
 //!aşağıyı burda da yapabiririz ama helpers folderına taşıyoruz sonra yukarda bağlantısını veriyoruz modülerbir yapı için
 // const hbs =exphbs.create({
@@ -44,30 +55,29 @@ app.set("view engine", "handlebars");
 
 //! bodyparser db i okuma işlemidiir.Bu sayfada en sona yazdın çalışmadı??? app.js de sıra önemli
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 //!kendi middleware lerimizi create edebiliriz.Why?bir işlem yapmadan önce dataya ihtiyaç duyarız yada başka şeylere bu datayı veya işlemleri elde edebilmek için middle ware kullanırız.örnek deneme bir middleware
 // const myMiddleware =(req,res,next) =>{
 //   console.log(`'benim adım tatarramazan'`)
-//   next() 
+//   next()
 // }
 // app.use('/',myMiddleware)
-
 
 app.listen(port, hostname, () => {
   console.log(`Server is working, http://${hostname}:${port}/`);
 });
 
-const main = require('./routes/main')
-app.use('/',main)
+const main = require("./routes/main");
+app.use("/", main);
 
-const posts = require('./routes/posts')
-app.use('/posts',posts)
+const posts = require("./routes/posts");
+app.use("/posts", posts);
 
-const users = require('./routes/users')
-app.use('/users',users)
+const users = require("./routes/users");
+app.use("/users", users);
 
 //!bu bölümü routes a taşıdık.buraya main post users ı taşıdık
 // app.get("/",(req,res)=>{
@@ -95,7 +105,3 @@ app.use('/users',users)
 //   // res.sendFile(path.resolve(__dirname,"site/about.html"))
 //   res.render("site/register");
 // });
-
-
-
-

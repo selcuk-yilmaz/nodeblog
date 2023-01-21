@@ -23,6 +23,7 @@ User.findOne({email},(error,user)=>{
     if(user){
         if(user.password ==password){
             //USER SESSİON
+            req.session.userId = user._id
             res.redirect('/')
         }else{
             res.redirect('/users/login')
