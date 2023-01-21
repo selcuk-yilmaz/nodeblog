@@ -7,8 +7,13 @@ router.get('/register',(req,res)=>{
 })
 router.post('/register',(req,res)=>{
     User.create(req.body,(error,user)=>{
-        res.redirect('/')
         // console.log(req.body);
+          req.session.sessionFlash = {
+            type: "alert alert-success",
+            message: "User account was created successfully",
+          };
+        res.redirect('/users/login')
+        
         
     })
    
@@ -37,5 +42,12 @@ User.findOne({email},(error,user)=>{
 })
 });
 
+router.get("/logout", (req, res) => {
+  // res.sendFile(path.resolve(__dirname,"site/about.html"))
+  req.session.destroy(()=>{
+    res.redirect("/")
+  })
+  
+});
 
 module.exports =router

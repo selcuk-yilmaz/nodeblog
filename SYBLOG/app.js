@@ -31,14 +31,12 @@ app.use(
   })
 );
 
-
 //! Flash - Message Middleware
-app.use((req,res,next)=>{
-  res.locals.sessionFlash = req.session.sessionFlash
-  delete req.session.sessionFlash
-  next()
-})
-
+app.use((req, res, next) => {
+  res.locals.sessionFlash = req.session.sessionFlash;
+  delete req.session.sessionFlash;
+  next();
+});
 
 app.use(fileUpload());
 
@@ -78,6 +76,21 @@ app.use(bodyParser.json());
 app.listen(port, hostname, () => {
   console.log(`Server is working, http://${hostname}:${port}/`);
 });
+
+//!display or displaynone links middleware
+app.use((req, res, next) => {
+  const { userId } = req.session;
+  if (userId) {
+    res.locals = {
+      displayLink: true,
+    };
+  } else {
+    res.locals = {
+      displayLink: false,
+    };
+  }
+  next()
+})
 
 const main = require("./routes/main");
 app.use("/", main);
