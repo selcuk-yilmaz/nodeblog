@@ -3,7 +3,11 @@ const router = express.Router();
 
 
 router.get("/", (req, res) => {
-  res.redirect("site-admin/index");
+  res.render("site-admin/index");
+});
+
+router.get("/categories", (req, res) => {
+  res.render("site-admin/categories");
 });
 
 module.exports = router;
