@@ -101,6 +101,9 @@ app.use("/posts", posts);
 const users = require("./routes/users");
 app.use("/users", users);
 
+const admin = require("./routes/admin/index");
+app.use("/admin", admin);
+
 //!bu bölümü routes a taşıdık.buraya main post users ı taşıdık
 // app.get("/",(req,res)=>{
 //   // res.sendFile(path.resolve(__dirname,"site/index.html"))

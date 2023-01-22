@@ -13,6 +13,10 @@ router.get("/about", (req, res) => {
   // res.sendFile(path.resolve(__dirname,"site/about.html"))
   res.render("site/about");
 });
+router.get("/admin", (req, res) => {
+  // res.sendFile(path.resolve(__dirname,"site/about.html"))
+  res.render("site-admin/index");
+});
 //! HTML'e databaseden veri gönderiyoruz. HTML'de karşılanacak
 router.get("/blog", (req, res) => {
   // res.sendFile(path.resolve(__dirname,"site/about.html"))
