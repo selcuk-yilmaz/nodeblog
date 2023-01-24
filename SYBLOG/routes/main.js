@@ -21,9 +21,12 @@ router.get("/about", (req, res) => {
 router.get("/blog", (req, res) => {
   // res.sendFile(path.resolve(__dirname,"site/about.html"))
   //  res.render("site/blog");
-  Post.find({}).lean().then((posts) => {
-    res.render("site/blog", { posts: posts });
-  });
+  Post.find({})
+    .sort({ $natural: -1 })
+    .lean()
+    .then((posts) => {
+      res.render("site/blog", { posts: posts });
+    });
 });
 
 router.get("/contact", (req, res) => {
