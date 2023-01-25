@@ -48,20 +48,20 @@ Express.js içinde, istekleri yönetmek için kullanılan yollar (route), genell
 Bu yüzden, Express.js frameworkünü kullanırken, route mekanizması kullanarak controller bölümünün işlevlerini yerine getirmek mümkündür. Ancak, uygulamanın büyüklüğüne ve ihtiyaçlarına göre, controller bölümünün işlevleri, yalnızca route mekanizması ile sınırlı kalmamaktadır.
 
 ### bu bölüm chatGBT den router.post ve router.get hakkında
-router.post ve router.get Express.js (Node.js web framework) için yapılandırılmış rotalardır. Bu iki yapı arasındaki temel fark, kullanılan HTTP metodudur.
+`router.post` ve `router.get`  Express.js (Node.js web framework) için yapılandırılmış rotalardır. Bu iki yapı arasındaki temel fark, kullanılan HTTP metodudur.
 
-router.post metodu, tarayıcının bir form veya API çağrısı gönderdiğinde kullanılır. Bu metodun kullanımı, kullanıcının veri gönderdiği ve sunucunun bu veriyi işlemesi gerektiği durumlarda yararlıdır. Örneğin, kullanıcının bir kayıt formunu doldurduğunda ve sunucu bu formdaki bilgileri veritabanına kaydetmek için kullanılabilir.
+`router.post metodu`, tarayıcının bir form veya API çağrısı gönderdiğinde kullanılır. Bu metodun kullanımı, kullanıcının veri gönderdiği ve sunucunun bu veriyi işlemesi gerektiği durumlarda yararlıdır. Örneğin, kullanıcının bir kayıt formunu doldurduğunda ve sunucu bu formdaki bilgileri veritabanına kaydetmek için kullanılabilir.
 
-router.get metodu ise, tarayıcının bir sayfayı yüklemek veya veri almak için bir istek gönderdiğinde kullanılır. Bu metodun kullanımı, kullanıcının veri almak için bir istek gönderdiği ve sunucunun bu isteği işlemesi gerektiği durumlarda yararlıdır. Örneğin, kullanıcının bir profil sayfasını görüntülemek için bir istek gönderdiğinde, sunucu kullanıcının profil bilgilerini veritabanından alıp tarayıcıya gönderebilir.
+`router.get` metodu ise, tarayıcının bir sayfayı yüklemek veya veri almak için bir istek gönderdiğinde kullanılır. Bu metodun kullanımı, kullanıcının veri almak için bir istek gönderdiği ve sunucunun bu isteği işlemesi gerektiği durumlarda yararlıdır. Örneğin, kullanıcının bir profil sayfasını görüntülemek için bir istek gönderdiğinde, sunucu kullanıcının profil bilgilerini veritabanından alıp tarayıcıya gönderebilir.
 
 Özet olarak <br/>
-router.post metodu <br/>
+`router.post` metodu <br/>
 * kullanıcı tarafından gönderilen veriye cevap vermek için kullanılır <br/>
-router.get metodu ise <br/>
+`router.get` metodu ise <br/>
 * kullanıcı tarafından istenen veriyi tarayıcıya göndermek için kullanılır. <br/>
 ### bu bölüm chatGBT den res.redirect ve res.render hakkında
-res.redirect("/users/login") komutu, kullanıcının tarayıcısının yönlendirilmesini sağlar ve yönlendirilen sayfaya bir GET isteği yapar. Örneğin, kullanıcı giriş sayfasına yönlendirilirse, tarayıcı kullanıcının giriş sayfasına gitmek için bir GET isteği yapar.
+`res.redirect("/users/login")` komutu, kullanıcının tarayıcısının yönlendirilmesini sağlar ve yönlendirilen sayfaya bir GET isteği yapar. Örneğin, kullanıcı giriş sayfasına yönlendirilirse, tarayıcı kullanıcının giriş sayfasına gitmek için bir GET isteği yapar.
 
-res.render('site/addpost') komutu ise, belirtilen dosyayı (örneğin addpost.ejs) tarayıcıya gönderir ve tarayıcı bu dosyayı işler. Bu komut, sunucunun tarayıcıya HTML, CSS ve JavaScript dosyaları göndermesini sağlar ve kullanıcının tarayıcısı bu dosyaları işler.
+`res.render('site/addpost')` komutu ise, belirtilen dosyayı (örneğin addpost.ejs) tarayıcıya gönderir ve tarayıcı bu dosyayı işler. Bu komut, sunucunun tarayıcıya HTML, CSS ve JavaScript dosyaları göndermesini sağlar ve kullanıcının tarayıcısı bu dosyaları işler.
 
-Özet olarak, res.redirect() yönlendirme yaparken res.render() ise sayfayı tarayıcıya gönderir.
+Özet olarak, `res.redirect()` yönlendirme yaparken `res.render()` ise sayfayı tarayıcıya gönderir.
