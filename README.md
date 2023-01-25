@@ -46,3 +46,12 @@ Express.js frameworkünü kullanırken, controller bölümünün işlevlerini ye
 Express.js içinde, istekleri yönetmek için kullanılan yollar (route), genellikle controller bölümünde tanımlanır. Örneğin, bir web uygulamasına gelen bir HTTP GET isteğini işlemek için, route kullanılarak belirli bir fonksiyonun çağrılması sağlanır. Bu fonksiyon, genellikle controller bölümünde yer alır ve veri modeli ile iletişim kurarak, isteğe yanıt verir.
 
 Bu yüzden, Express.js frameworkünü kullanırken, route mekanizması kullanarak controller bölümünün işlevlerini yerine getirmek mümkündür. Ancak, uygulamanın büyüklüğüne ve ihtiyaçlarına göre, controller bölümünün işlevleri, yalnızca route mekanizması ile sınırlı kalmamaktadır.
+
+*bold*bu bölüm chatGBT den router.post ve router.get hakkında
+router.post ve router.get Express.js (Node.js web framework) için yapılandırılmış rotalardır. Bu iki yapı arasındaki temel fark, kullanılan HTTP metodudur.
+
+router.post metodu, tarayıcının bir form veya API çağrısı gönderdiğinde kullanılır. Bu metodun kullanımı, kullanıcının veri gönderdiği ve sunucunun bu veriyi işlemesi gerektiği durumlarda yararlıdır. Örneğin, kullanıcının bir kayıt formunu doldurduğunda ve sunucu bu formdaki bilgileri veritabanına kaydetmek için kullanılabilir.
+
+router.get metodu ise, tarayıcının bir sayfayı yüklemek veya veri almak için bir istek gönderdiğinde kullanılır. Bu metodun kullanımı, kullanıcının veri almak için bir istek gönderdiği ve sunucunun bu isteği işlemesi gerektiği durumlarda yararlıdır. Örneğin, kullanıcının bir profil sayfasını görüntülemek için bir istek gönderdiğinde, sunucu kullanıcının profil bilgilerini veritabanından alıp tarayıcıya gönderebilir.
+
+Özet olarak, router.post metodu kullanıcı tarafından gönderilen veriye cevap vermek için kullanılır, router.get metodu ise kullanıcı tarafından istenen veriyi tarayıcıya göndermek için kullanılır.
