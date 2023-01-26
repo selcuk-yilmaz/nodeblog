@@ -1,7 +1,8 @@
-const express = require("express");
-const router = express.Router();
-const Post = require("../models/Post");
-const Category = require("../models/Category");
+const express = require("express")
+const router = express.Router()
+const Post = require("../models/Post")
+const Category = require("../models/Category")
+const User = require('../models/User')
 //! app yazan yerleri router ile değiştirdik.
 router.get("/", (req, res) => {
   // res.sendFile(path.resolve(__dirname,"site/index.html"))
@@ -22,6 +23,7 @@ router.get("/blog", (req, res) => {
   // res.sendFile(path.resolve(__dirname,"site/about.html"))
   //  res.render("site/blog");
   Post.find({})
+    .populate({ path: "author", model: User })
     .sort({ $natural: -1 })
     .lean()
     .then((posts) => {
