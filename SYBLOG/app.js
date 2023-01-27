@@ -10,7 +10,7 @@ const fileUpload = require("express-fileUpload");
 const generateDate = require("./helpers/generateDate").generateDate;
 const expressSession = require("express-session");
 const connectMongo = require("connect-mongo");
-const methodOverride =require('method-override')
+const methodOverride = require("method-override");
 //!mongoose kullanımı.veritabanı ile irtiibatı sağlar ve verileri database yazar
 mongoose
   .set("strictQuery", true)
@@ -43,7 +43,7 @@ app.use(fileUpload());
 
 //! static dosyaların okunması için
 app.use(express.static("public"));
-app.use(methodOverride('_method'))
+app.use(methodOverride("_method"));
 //!aşağıyı burda da yapabiririz ama helpers folderına taşıyoruz sonra yukarda bağlantısını veriyoruz modülerbir yapı için
 // const hbs =exphbs.create({
 //   helpers:{
@@ -90,8 +90,8 @@ app.use((req, res, next) => {
       displayLink: false,
     };
   }
-  next()
-})
+  next();
+});
 
 const main = require("./routes/main");
 app.use("/", main);

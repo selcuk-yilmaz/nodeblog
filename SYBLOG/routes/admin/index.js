@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Category = require("../../models/Category");
-const Post = require("../../models/Post")
+const Post = require("../../models/Post");
 
 router.get("/", (req, res) => {
   res.render("site-admin/index");
@@ -31,15 +31,32 @@ router.delete("/categories/:id", (req, res) => {
 });
 
 router.get("/posts", (req, res) => {
-    Post.find({})
+  Post.find({})
     .populate({ path: "category", model: Category })
     .sort({ $natural: -1 })
     .lean()
     .then((posts) => {
-     
-          res.render("site-admin/posts", {posts: posts});
+      res.render("site-admin/posts", { posts: posts });
+    });
+});
+
+router.delete("/posts/:id", (req, res) => {
+  Post.remove({ _id: req.params.id }).then(() => {
+    res.redirect("/admin/posts");
+  });
+});
+
+router.get("/posts/edit/:id", (req, res) => {
+  Post.findOne({ _id: req.params._id }).then((post) => {
+    Category.find({})
+      .lean()
+      .then((categories) => {
+        res.render("site-admin/editpost", {
+          post: post,
+          categories: categories,
         });
-  
+      });
+  });
 });
 
 module.exports = router;

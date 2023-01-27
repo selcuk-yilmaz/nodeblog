@@ -62,10 +62,13 @@
       <td>{{title}} </td>
       <td>{{category.name}} </td>
       <td>
-edit
+      <a class="btn btn-warning" href="/admin/posts/edit/{{_id}}">EDİT</a>
       </td>
       <td>
-delete
+        <form action="/admin/posts/{{_id}}?_method=DELETE" method="POST">
+          <input type="hidden" name="_method" value="DELETE" >
+          <button type="submit" class="btn btn-danger">DELETE</button>
+        </form>
       </td>
     </tr>
     {{/each}}
