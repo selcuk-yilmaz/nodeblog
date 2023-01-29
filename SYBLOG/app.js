@@ -8,9 +8,11 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileUpload");
 const generateDate = require("./helpers/generateDate").generateDate;
+const limit = require('./helpers/limit').limit
 const expressSession = require("express-session");
 const connectMongo = require("connect-mongo");
 const methodOverride = require("method-override");
+//------------------------------------------------------------------------------
 //!mongoose kullanımı.veritabanı ile irtiibatı sağlar ve verileri database yazar
 mongoose
   .set("strictQuery", true)
@@ -21,7 +23,7 @@ mongoose
 //   useUnifiedTopology: true,
 //   useCreateIndex: true,
 // };
-
+//----------------------------------------------------------------------------------
 const mongoStore = connectMongo(expressSession);
 app.use(
   expressSession({
@@ -31,20 +33,23 @@ app.use(
     store: new mongoStore({ mongooseConnection: mongoose.connection }),
   })
 );
-
+//------------------------------------------------------------------------------------------
 //! Flash - Message Middleware
 app.use((req, res, next) => {
   res.locals.sessionFlash = req.session.sessionFlash;
   delete req.session.sessionFlash;
   next();
 });
-
+//----------------------------------------------------------------------------
 app.use(fileUpload());
-
+//----------------------------------------------------------------------------------
 //! static dosyaların okunması için
 app.use(express.static("public"));
+//----------------------------------------------------------------------------------
+//!burası heralde update için olabilir bakılacak???
 app.use(methodOverride("_method"));
-//!aşağıyı burda da yapabiririz ama helpers folderına taşıyoruz sonra yukarda bağlantısını veriyoruz modülerbir yapı için
+//---------------------------------------------------------------------------------------------------
+//!1.hali=aşağıyı burda da yapabiririz ama helpers folderına taşıyoruz sonra yukarda bağlantısını veriyoruz modülerbir yapı için
 // const hbs =exphbs.create({
 //   helpers:{
 //     generateDate:(date,format) =>{
@@ -53,31 +58,40 @@ app.use(methodOverride("_method"));
 //   }
 // })
 
-//!template engine ler HTML sayfalarını daha kolay yazdırmamızı sağlar.ör:handlebars
-app.engine(
-  "handlebars",
-  exphbs.engine({ helpers: { generateDate: generateDate } })
-);
+//!2.hali=template engineler HTML sayfalarını daha kolay yazdırmamızı sağlar.ör:handlebars
+// app.engine(
+//   "handlebars",
+//   exphbs.engine({ helpers: { generateDate: generateDate } })
+// );
+//!3.hali=
+const hbs = exphbs.create({
+  helpers: {
+    generateDate: generateDate,
+    limit:limit
+  }
+})
+app.engine('handlebars',hbs.engine)
+//---------------------------------------------------------------------------------------------------------
 app.set("view engine", "handlebars");
 // app.set("views", "./views");
-
-//! bodyparser db i okuma işlemidiir.Bu sayfada en sona yazdın çalışmadı??? app.js de sıra önemli
+//-------------------------------------------------------------------------------------------
+//! bodyparser db i okuma işlemidir.Bu sayfada en sona yazdın çalışmadı??? app.js de sıra önemli
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
-
+//------------------------------------------------------------------------------------------------
 //!kendi middleware lerimizi create edebiliriz.Why?bir işlem yapmadan önce dataya ihtiyaç duyarız yada başka şeylere bu datayı veya işlemleri elde edebilmek için middle ware kullanırız.örnek deneme bir middleware
 // const myMiddleware =(req,res,next) =>{
 //   console.log(`'benim adım tatarramazan'`)
 //   next()
 // }
 // app.use('/',myMiddleware)
-
+//-------------------------------------------------------------------------------------------------
 app.listen(port, hostname, () => {
   console.log(`Server is working, http://${hostname}:${port}/`);
 });
-
+//--------------------------------------------------------------------------------------------------
 //!display or displaynone links middleware
 app.use((req, res, next) => {
   const { userId } = req.session;
@@ -92,7 +106,8 @@ app.use((req, res, next) => {
   }
   next();
 });
-
+//----------------------------------------------------------------------------------------------
+//! Burası router bağlantısı
 const main = require("./routes/main");
 app.use("/", main);
 
@@ -104,7 +119,7 @@ app.use("/users", users);
 
 const admin = require("./routes/admin/index");
 app.use("/admin", admin);
-
+//--------------------------------------------------------------------------------------------------
 //!bu bölümü routes a taşıdık.buraya main post users ı taşıdık
 // app.get("/",(req,res)=>{
 //   // res.sendFile(path.resolve(__dirname,"site/index.html"))
