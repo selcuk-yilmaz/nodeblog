@@ -25,10 +25,19 @@ router.get("/:id", (req, res) => {
       Category.find({})
         .lean()
         .then((categories) => {
-          res.render("site/post", {
+//!daha önce 1 tane post gönderdin satır 22 de şimdi sidebar tümiçin tüm postları göndermen gerekiyor.
+          Post.find({})
+    .populate({ path: "author", model: User })
+    .sort({ $natural: -1 })
+    .lean()
+    .then((posts) => {
+      res.render("site/post", {
             post: post.toJSON(),
             categories: categories,
+            posts:posts
           });
+    })
+          
         });
     });
 });
