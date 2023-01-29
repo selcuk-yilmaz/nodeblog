@@ -18,34 +18,37 @@
 <div class="widget">
 						<h3 class="mb-3">Latest Posts</h3>
 						<!-- single post -->
+{{#each (limit posts 3)}}
+
 						<div class="widget-post">
 							<a href="#">
-								<img class="img-fluid" src="./img/post1.jpg" alt="">Lorem Ipsum
+								<img class="img-fluid" src="{{post_image}}" alt="">{{title}}
 							</a>
 							<ul class="blog-meta">
-								<li>Oct 18, 2017</li>
+								<li>{{generateDate date 'MMM DD YYYY'}}</li>
 							</ul>
 						</div>
+{{/each}}
 						<!-- /single post -->
 						<!-- single post -->
-						<div class="widget-post">
+						{{!-- <div class="widget-post">
 							<a href="#">
 								<img src="./img/post2.jpg" alt="">Lorem Ipsum
 							</a>
 							<ul class="blog-meta">
 								<li>Oct 18, 2017</li>
 							</ul>
-						</div>
+						</div> --}}
 						<!-- /single post -->
 						<!-- single post -->
-						<div class="widget-post">
+						{{!-- <div class="widget-post">
 							<a href="#">
 								<img src="./img/post3.jpg" alt="">Lorem Ipsum
 							</a>
 							<ul class="blog-meta">
 								<li>Oct 18, 2017</li>
 							</ul>
-						</div>
+						</div> --}}
 						<!-- /single post -->
 
 					</div>
