@@ -1,8 +1,8 @@
-const express = require("express")
-const router = express.Router()
-const Post = require("../models/Post")
-const Category = require("../models/Category")
-const User = require('../models/User')
+const express = require("express");
+const router = express.Router();
+const Post = require("../models/Post");
+const Category = require("../models/Category");
+const User = require("../models/User");
 //! app yazan yerleri router ile değiştirdik.
 router.get("/", (req, res) => {
   // res.sendFile(path.resolve(__dirname,"site/index.html"))
@@ -27,8 +27,27 @@ router.get("/blog", (req, res) => {
     .sort({ $natural: -1 })
     .lean()
     .then((posts) => {
-      Category.find({})
-        .lean()
+      //! Category.find arasına aşağıdaki girdiyi yapıyruz.çünkü category sayılarını dinamik hale getirmek için
+      Category.aggregate([
+        {
+          $lookup: {
+            from: "posts",
+            localField: "_id",
+            foreignField: "category",
+            as: "posts",
+          },
+        },
+        {
+          $project: {
+            _id: 1,
+            name: 1,
+            num_of_posts: { $size: "$posts" },
+          },
+        },
+      ])
+      //! find ve lean a gerek kalmadı
+        //  .find({})
+        // .lean()
         .then((categories) => {
           res.render("site/blog", { posts: posts, categories: categories });
         });

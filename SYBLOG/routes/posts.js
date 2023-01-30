@@ -22,22 +22,40 @@ router.get("/:id", (req, res) => {
   Post.findById(req.params.id)
     .populate({ path: "author", model: User })
     .then((post) => {
-      Category.find({})
-        .lean()
+      //! Category.find arasına aşağıdaki girdiyi yapıyruz.çünkü category sayılarını dinamik hale getirmek için
+      Category.aggregate([
+        {
+          $lookup: {
+            from: "posts",
+            localField: "_id",
+            foreignField: "category",
+            as: "posts",
+          },
+        },
+        {
+          $project: {
+            _id: 1,
+            name: 1,
+            num_of_posts: { $size: "$posts" },
+          },
+        },
+      ])
+        //! find ve lean a gerek kalmadı
+        //  .find({})
+        // .lean()
         .then((categories) => {
-//!daha önce 1 tane post gönderdin satır 22 de şimdi sidebar tümiçin tüm postları göndermen gerekiyor.
+          //!daha önce 1 tane post gönderdin satır 22 de şimdi sidebar tümiçin tüm postları göndermen gerekiyor.
           Post.find({})
-    .populate({ path: "author", model: User })
-    .sort({ $natural: -1 })
-    .lean()
-    .then((posts) => {
-      res.render("site/post", {
-            post: post.toJSON(),
-            categories: categories,
-            posts:posts
-          });
-    })
-          
+            .populate({ path: "author", model: User })
+            .sort({ $natural: -1 })
+            .lean()
+            .then((posts) => {
+              res.render("site/post", {
+                post: post.toJSON(),
+                categories: categories,
+                posts: posts,
+              });
+            });
         });
     });
 });
