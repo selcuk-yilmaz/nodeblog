@@ -1,7 +1,9 @@
-module.exports = {
-  limit:(arr, limit)=>{
-    if(!Array.isArray(arr)){return []}
-    return arr.slice(0,limit)
-  }
- 
-}
+//! hbs.js e taşıdık
+// module.exports = {
+//   limit: (arr, limit) => {
+//     if (!Array.isArray(arr)) {
+//       return [];
+//     }
+//     return arr.slice(0, limit);
+//   },
+// };

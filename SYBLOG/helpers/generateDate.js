@@ -1,5 +1,6 @@
-const moment = require("moment");
+//! hbs.js e taşıdık
+// const moment = require("moment");
 
 
-module.exports ={generateDate:(date,format) =>{
-      return moment(date).format(format)}}
+// module.exports ={generateDate:(date,format) =>{
+//       return moment(date).format(format)}}

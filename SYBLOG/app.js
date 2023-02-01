@@ -7,8 +7,13 @@ const hostname = "127.0.0.1";
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileUpload");
-const generateDate = require("./helpers/generateDate").generateDate;
-const limit = require('./helpers/limit').limit
+//------------------------------------------------
+//! generateDate,limit,truncate => 3 fonksiyonu tek kalemde require ettik.
+// const generateDate = require("./helpers/generateDate").generateDate;
+// const limit = require('./helpers/limit').limit
+// const truncate = require('./helpers/truncate').truncate
+const {generateDate,limit,truncate } = require("./helpers/hbs")
+//---------------------------------------------
 const expressSession = require("express-session");
 const connectMongo = require("connect-mongo");
 const methodOverride = require("method-override");
@@ -33,13 +38,6 @@ app.use(
     store: new mongoStore({ mongooseConnection: mongoose.connection }),
   })
 );
-//------------------------------------------------------------------------------------------
-//! Flash - Message Middleware
-app.use((req, res, next) => {
-  res.locals.sessionFlash = req.session.sessionFlash;
-  delete req.session.sessionFlash;
-  next();
-});
 //----------------------------------------------------------------------------
 app.use(fileUpload());
 //----------------------------------------------------------------------------------
@@ -67,7 +65,8 @@ app.use(methodOverride("_method"));
 const hbs = exphbs.create({
   helpers: {
     generateDate: generateDate,
-    limit:limit
+    limit:limit,
+    truncate:truncate
   }
 })
 app.engine('handlebars',hbs.engine)
@@ -104,6 +103,12 @@ app.use((req, res, next) => {
       displayLink: false,
     };
   }
+  next();
+});
+//! Flash - Message Middleware yukadaki middlewareden sonra çalışıyor dikkat!!!!
+app.use((req, res, next) => {
+  res.locals.sessionFlash = req.session.sessionFlash;
+  delete req.session.sessionFlash;
   next();
 });
 //----------------------------------------------------------------------------------------------
