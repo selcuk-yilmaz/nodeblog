@@ -176,7 +176,7 @@ nav.shrink {
 #hero {
 	text-align: center;
 	color: white;
-	background: linear-gradient( rgba(20, 20, 20, .5), rgba(20, 20, 20, .5)), url("../img/homeback.jpg");
+	background: linear-gradient( rgba(20, 20, 20, .5), rgba(20, 20, 20, .5)), url("../img/homeback.png");
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-position: center center;

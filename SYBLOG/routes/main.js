@@ -22,35 +22,51 @@ router.get("/about", (req, res) => {
 router.get("/blog", (req, res) => {
   // res.sendFile(path.resolve(__dirname,"site/about.html"))
   //  res.render("site/blog");
+  //!pagination için
+  const postPerPage = 1;
+  const page = req.query.page || 2;
+
+  //---------------------------
   Post.find({})
     .populate({ path: "author", model: User })
     .sort({ $natural: -1 })
     .lean()
+    //!pagination için
+    .skip(postPerPage * page - postPerPage)
+    .limit(postPerPage)
+    //----------------------------
     .then((posts) => {
-      //! Category.find arasına aşağıdaki girdiyi yapıyruz.çünkü category sayılarını dinamik hale getirmek için
-      Category.aggregate([
-        {
-          $lookup: {
-            from: "posts",
-            localField: "_id",
-            foreignField: "category",
-            as: "posts",
+      Post.countDocuments().then(postCount =>{
+        //! Category.find arasına aşağıdaki girdiyi yapıyruz.çünkü category sayılarını dinamik hale getirmek için
+        Category.aggregate([
+          {
+            $lookup: {
+              from: "posts",
+              localField: "_id",
+              foreignField: "category",
+              as: "posts",
+            },
           },
-        },
-        {
-          $project: {
-            _id: 1,
-            name: 1,
-            num_of_posts: { $size: "$posts" },
+          {
+            $project: {
+              _id: 1,
+              name: 1,
+              num_of_posts: { $size: "$posts" },
+            },
           },
-        },
-      ])
-      //! find ve lean a gerek kalmadı
-        //  .find({})
-        // .lean()
-        .then((categories) => {
-          res.render("site/blog", { posts: posts, categories: categories });
-        });
+        ])
+          //! find ve lean a gerek kalmadı
+          //  .find({})
+          // .lean()
+          .then((categories) => {
+            res.render("site/blog", {
+              posts: posts,
+              categories: categories,
+              current: parseInt(page),
+              pages: Math.ceil(postCount / postPerPage),
+            });
+          });
+      })
     });
 });
 
