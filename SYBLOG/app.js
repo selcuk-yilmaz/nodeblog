@@ -125,6 +125,9 @@ app.use("/users", users);
 
 const admin = require("./routes/admin/index");
 app.use("/admin", admin);
+
+const contact = require("./routes/contact");
+app.use("/contact", contact);
 //--------------------------------------------------------------------------------------------------
 //!bu bölümü routes a taşıdık.buraya main post users ı taşıdık
 // app.get("/",(req,res)=>{
