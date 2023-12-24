@@ -8,8 +8,8 @@ router.post("/email", (req, res) => {
 <h2>Mail Details</h2>
     <ul>
         <li>NAME : ${req.body.name}</li>
-        <li>NAME : ${req.body.email}</li>
-        <li>NAME : ${req.body.phone}</li>
+        <li>EMAİL : ${req.body.email}</li>
+        <li>PHONE : ${req.body.phone}</li>
     </ul>
 <h3>Message</h3>
 <p>${req.body.message}</p> 
